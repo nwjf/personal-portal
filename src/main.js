@@ -5,8 +5,11 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import 'element-plus/theme-chalk/display.css';
 import './style/index.scss';
+import pinia from './store/index.ts';
 
 const app = createApp(App);
+
+app.use(pinia);
 app.use(router);
 app.use(ElementPlus);
 app.mount('#app');

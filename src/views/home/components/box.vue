@@ -1,7 +1,23 @@
+<template>
+  <div class="box">
+    <div class="box-title">{{ props.title }}</div>
+    <div class="box-warp">
+      <slot />
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({ title: String });
+</script>
+
+<style lang="scss" scoped>
 .box {
   width: 100%;
   padding: 10px 24px;
-  background: rgba(255, 255, 255, .9);
+  background: rgba(255, 255, 255, 1);
   border-radius: 15px;
   box-shadow: 0 0.5rem 0.625rem #d4d4d44d;
   margin-top: 20px;
@@ -25,3 +41,4 @@
     flex-wrap: wrap;
   }
 }
+</style>

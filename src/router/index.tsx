@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
     {
       path: '/',
       name: '首页',
-      component: () => import('../views/home/index.tsx'),
+      component: () => import('../views/home/index.vue'),
     },
 ];
 

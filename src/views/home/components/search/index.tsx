@@ -105,7 +105,11 @@ export default defineComponent({
             </div>
           </div>
         </div>
-        <input className="search-input" onInput={(d) => this.onInput(d)} onKeydown={this.onKeydown}/>
+        <input
+          placeholder="搜你所想"
+          className="search-input"
+          onInput={(d) => this.onInput(d)}
+          onKeydown={this.onKeydown}/>
         <div className="search-rightpanel" onClick={this.onSearch}>
           <img src={searchIcon} alt="search-icon" />
         </div>
