@@ -1,27 +1,39 @@
 <template>
-  <div class="home-wrap">
+  <div class="home-wrap" :style="{ backgroundImage: `url(${bg})`, backgroundColor: bg }">
     <div className="home-content">
-      <div class="home-title">我的世界，我做主！</div>
+      <div class="home-title">{{title}}</div>
       <div class="home-msg">捐躯赴国难，视死忽如归。——曹植《白马篇》</div>
-      <div class="setting"><el-icon><Tools /></el-icon></div>
-      <search style="margin-top: 100px;" />
+      <div class="setting" @click="onShowConfig"><el-icon><Tools /></el-icon></div>
 
-      <box title="个人技术展示">
-        <project/>
-      </box>
+      <template v-for="item in moduleList" :key="item">
 
-      <el-row :gutter="24">
-        <el-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <box title="极速刷步(小米运动)">
-            <step-num type="xiaomi" />
-          </box>
-        </el-col>
-        <el-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <box title="极速刷步(zepp life)">
-            <step-num type="zepplife" />
-          </box>
-        </el-col>
-      </el-row>
+        <search
+          v-if="item === 'search'"
+          :key="item"
+          style="margin-top: 100px;" />
+
+        <box
+          v-if="item === 'project'"
+          :key="item"
+          title="个人技术展示">
+          <project/>
+        </box>
+
+        <el-row :key="item" :gutter="24" v-if="item === 'setp'">
+          <el-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <box title="极速刷步(小米运动)">
+              <step-num type="xiaomi" />
+            </box>
+          </el-col>
+          <el-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <box title="极速刷步(zepp life)">
+              <step-num type="zepplife" />
+            </box>
+          </el-col>
+        </el-row>
+      </template>
+
+
     </div>
 
     <setting />
@@ -35,6 +47,16 @@ import Project from './components/project.vue';
 import StepNum from './components/stepNum.vue';
 import { Tools } from '@element-plus/icons-vue';
 import Setting from './components/setting.vue';
+
+import { toRefs } from 'vue';
+import { useConfigStore } from '@/store/config.ts';
+const { setShowConfig } = useConfigStore();
+const { moduleList, title, bg } = toRefs(useConfigStore());
+
+const onShowConfig = () => {
+  setShowConfig(true);
+};
+
 </script>
 
 
@@ -43,6 +65,9 @@ import Setting from './components/setting.vue';
   width: 100%;
   height: 100%;
   background: #000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   .home-content {
     max-width: 1200px;
     margin: auto;
@@ -69,7 +94,7 @@ import Setting from './components/setting.vue';
     font-size: 30px;
     position: fixed;
     top: 20px;
-    right: 30px;
+    right: 20px;
     cursor: pointer;
   }
 }

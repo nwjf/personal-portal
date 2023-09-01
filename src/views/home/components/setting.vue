@@ -1,15 +1,16 @@
 <template>
   <el-drawer
-    v-model="show"
+    :model-value="showConfig"
     size="300px"
     title="设置"
-    :direction="direction"
-    :before-close="handleClose"
+    @close="setShowConfig(false)"
   >
     <div class="setting-wrap">
-      123123
+      <el-divider content-position="left">标题修改</el-divider>
+      <el-input v-model="homeTitle"/>
+
       <el-divider content-position="left">模块展示</el-divider>
-      <el-checkbox-group :model-value="moduleList" @change="onModuleChange">
+      <el-checkbox-group v-model="moduleActive">
         <el-checkbox
           v-for="(item, index) in module"
           :key="index"
@@ -21,17 +22,32 @@
         </el-checkbox>
       </el-checkbox-group>
 
-      <el-button type="primary" style="width: 100%;margin-top: 30px;">保存</el-button>
+      <el-divider content-position="left">背景设置</el-divider>
+      <div class="bg-box">
+        <div
+          class="bg-box-item"
+          v-for="(item, index) in bgList"
+          :key="index"
+          :style="{ background: item}"
+          @click="onSelectBg(item)">
+          <el-icon class="icon" v-if="homeBg === item"><SuccessFilled /></el-icon>
+          <img :src="item" alt="" v-if="item.indexOf('http') >= 0">
+        </div>
+      </div>
+
+      <el-button type="primary" style="width: 100%;margin-top: 30px;" @click="onSubmit">保存</el-button>
     </div>
   </el-drawer>
 </template>
 
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, toRefs } from 'vue';
 import { useConfigStore } from '@/store/config.ts';
+import { SuccessFilled } from '@element-plus/icons-vue'
 
-const { moduleList, setModuleList } = useConfigStore();
+const { moduleList, showConfig, title, bg } = toRefs(useConfigStore());
+const { setModuleList, setShowConfig, setTitle, setConfigLocal, setBg } = useConfigStore();
 
 const show = ref<boolean>(true);
 const module = ref<Array<any>>([
@@ -39,16 +55,58 @@ const module = ref<Array<any>>([
   { id: 'project', name: '极速项目', disabled: false },
   { id: 'setp', name: '极速刷步', disabled: false },
 ]);
-const onModuleChange = (data) => {
-  console.log(data);
-  setModuleList(data);
+const moduleActive = ref([...moduleList.value]);
+
+
+// 标题
+const homeTitle = ref(title.value);
+
+// 背景
+const bgList = [
+  'https://image-70559.picnjc.qpic.cn/albumpic/42ef97395601262f7adfba5353cc6cd0.jpeg',
+  '#000000'
+];
+const homeBg = ref(bg.value);
+const onSelectBg = (data) => {
+  homeBg.value = data;
 };
-// const moduleListActive = ref(moduleList);
+
+// 保存
+const onSubmit = () => {
+  setModuleList(moduleActive.value);
+  setTitle(homeTitle.value);
+  setBg(homeBg.value);
+  setConfigLocal();
+};
 </script>
 
 
 <style lang="scss" scoped>
 .setting-wrap {
-
+  .bg-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .bg-box-item {
+      width: 120px;
+      height: 60px;
+      background: #000;
+      cursor: pointer;
+      position: relative;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .icon {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        color: #409eff;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
 }
 </style>
