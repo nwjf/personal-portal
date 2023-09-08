@@ -10,7 +10,7 @@ export const useConfigStore = defineStore('configStore', () => {
 
   const isGetLocal = ref<boolean>(false);
   const showConfig = ref<boolean>(false);
-  const moduleList = ref(['search']);
+  const moduleList = ref(['search', 'project', 'setp']);
   const title = ref<string>('厉害了，我的国！');
   const bg = ref<string>('https://image-70559.picnjc.qpic.cn/albumpic/42ef97395601262f7adfba5353cc6cd0.jpeg');
 

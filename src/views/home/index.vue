@@ -73,6 +73,8 @@ const onShowConfig = () => {
     margin: auto;
     padding-top: 1px;
     padding: 36px;
+    height: 100%;
+    overflow: auto;
     .home-title {
       text-align: center;
       color: #fff;

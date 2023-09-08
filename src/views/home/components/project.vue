@@ -1,13 +1,15 @@
 <template>
-  <div
-    class="project-wrap"
-    v-for="(item, index) in projectList"
-    :key="index"
-    @click="onClick(item)">
-    <div class="project-pic">
-      <img :src="item.img" >
+  <div class="project-wrap">
+    <div
+      class="project-item"
+      v-for="(item, index) in projectList"
+      :key="index"
+      @click="onClick(item)">
+      <div class="project-pic">
+        <img :src="item.img" >
+      </div>
+      <div class="project-name">{{item.name}}</div>
     </div>
-    <div class="project-name">{{item.name}}</div>
   </div>
 </template>
 
@@ -72,12 +74,19 @@ const onClick = (data) => {
 
 <style lang="scss" scoped>
 .project-wrap {
-  min-width: 100px;
-  cursor: pointer;
-  border-radius: 10px;
-  padding: 4px;
-  flex: none;
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  .project-item {
+    width: 100px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 4px;
+    flex: none;
+    overflow: hidden;
+    @media screen and (max-width: 500px) {
+      width: 33.33%;
+    }
+  }
   // border: 1px solid red;
   &:hover {
     box-shadow: 0 0 0.625rem #d4d4d44d;
