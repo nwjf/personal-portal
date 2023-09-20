@@ -15,7 +15,7 @@
         <box
           v-if="item === 'project'"
           :key="item"
-          title="个人技术展示">
+          title="精彩小项目">
           <project/>
         </box>
 

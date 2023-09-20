@@ -38,7 +38,7 @@ const projectList = ref([
     img: new URL('@/assets/js.png', import.meta.url).href,
   },
   {
-    name: '博客',
+    name: 'blog',
     href: '/blog',
     img: new URL('@/assets/blog.png', import.meta.url).href,
   },
