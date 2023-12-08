@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box bordered">
     <div class="box-title">{{ props.title }}</div>
     <div class="box-warp">
       <slot />

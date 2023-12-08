@@ -33,13 +33,13 @@ const xywy = () => {
 
 const projectList = ref([
   {
-    name: '运算系统',
-    href: '/parental-tools',
+    name: '超级习题',
+    href: 'https://xiti.junfa.wang',
     img: new URL('@/assets/js.png', import.meta.url).href,
   },
   {
     name: 'blog',
-    href: '/blog',
+    href: 'https://blog.junfa.wang',
     img: new URL('@/assets/blog.png', import.meta.url).href,
   },
   {
@@ -55,7 +55,7 @@ const projectList = ref([
   },
   {
     name: 'adminX demo',
-    href: '/adminX',
+    href: 'https://adminx.junfa.wang',
     img: new URL('@/assets/adminx.png', import.meta.url).href,
   },
   {
