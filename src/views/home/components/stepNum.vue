@@ -40,7 +40,7 @@ const isRemember = ref(false); // 是否记住密码
 
 const xiaomiFn = (formData, close) => {
   axios({
-    url: 'https://api.kit9.cn/api/xiaomi_sports/api.php',
+    url: 'https://stepapi.junfa.wang/api',
     method: 'post',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
@@ -91,7 +91,7 @@ const onSubmit = (formRef) => {
       localStorage.removeItem(props.type);
     }
     const close = () => { loading.value = false; };
-    if (props.type === 'xiaomi') xiaomiFn(formData, close);
+    if (props.type === 'xiaomi') xiaomiFn({ ...formData, user: formData.mobile}, close);
     else if (props.type === 'zepplife') zepplifeFn(formData, close);
   });
 };
